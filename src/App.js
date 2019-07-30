@@ -164,7 +164,7 @@ const App = () => {
           </div>
           :
           <div className="display">
-            <p>Mission Failed: The civilian was abducted by the UFO </p>
+            <p>Mission Failed: The civilian was abducted by the UFO. The Codeword was {codeword}.</p>
             <button className="button" type="button" onClick={startGame}>Play again?</button>
           </div>
         }
