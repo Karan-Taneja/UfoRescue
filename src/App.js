@@ -191,7 +191,7 @@ const App = () => {
             </code>
           </pre>
           {gameState === 1 ?
-          <form className="form-group">
+          <form className="form-group" onSubmit={handleSubmit}>
             <div className='form-control'>
               <input 
                 type="text"
