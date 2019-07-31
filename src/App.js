@@ -82,7 +82,6 @@ const App = () => {
     e.preventDefault();
     const nuInput = e.target.value.toUpperCase();
     const code = nuInput.charCodeAt(0);
-    
     if(input.length < 1){
       if(code >= 65 && code <= 90){
         setInput(nuInput)
@@ -101,27 +100,29 @@ const App = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if(input.length > 1){
+    if(input.length === 0){
       setInput('')
       setErr('Invalid input, try again.');
     }
-    else if(incorrect.includes(input) || correct.includes(input)){
-      setInput('')
-      setErr('You already guessed that letter.');
-    }
     else {
-      const result = Game.determineCorrectness(codewordObj, input);
-      const call = typeof result;
-      if(call === 'string'){
+      if(incorrect.includes(input) || correct.includes(input)){
         setInput('')
-        setMessage('')
-        setIncorrect(incorrect.concat([result]));
-      } else if(call === 'object'){
-        codewordObj[result.char].guessed = true;
-        setInput('')
-        setCorrect(correct.concat([result.char]));
-        setCorrectObj(result);
-        setCodewordObj(codewordObj);
+        setErr('You already guessed that letter.');
+      }
+      else {
+        const result = Game.determineCorrectness(codewordObj, input);
+        const call = typeof result;
+        if(call === 'string'){
+          setInput('')
+          setMessage('')
+          setIncorrect(incorrect.concat([result]));
+        } else if(call === 'object'){
+          codewordObj[result.char].guessed = true;
+          setInput('')
+          setCorrect(correct.concat([result.char]));
+          setCorrectObj(result);
+          setCodewordObj(codewordObj);
+        };
       };
     };
   };
@@ -198,6 +199,7 @@ const App = () => {
                 className="guess"
                 value={input} 
                 onChange={handleInput}
+                onSubmit={handleSubmit}
                 id="input--guess"
                 />
               <button className="button submit" type="button" onClick={handleSubmit}>Guess</button>
