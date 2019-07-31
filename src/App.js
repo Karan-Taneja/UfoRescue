@@ -75,6 +75,12 @@ const App = () => {
     setCodewordObj(codewordObj);
     setWordDisplay(display);
     setPossibleWords(possible);
+    setIncorrect([]);
+    setCorrect([]);
+    setCorrectObj({});
+    setUfo(UFO[0]);
+    setInput('');
+    setErr('');
     setGameState(1);
   };
 
